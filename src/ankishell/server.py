@@ -18,10 +18,23 @@ from fastmcp import FastMCP, FastMCPApp
 app = FastMCPApp("AnkiShell")
 
 
+DEFAULT_CONFIG_TOML = """\
+[anki]
+endpoint = "http://localhost:8765"
+
+[card]
+default_type = "Cloze"
+
+[decks]
+filter = ["*"]
+"""
+
+
 def load_config() -> dict:
     config_path = Path(user_config_dir("ankishell")) / "config.toml"
     if not config_path.exists():
-        return {"anki": {"endpoint": "http://localhost:8765"}, "card": {"default_type": "Cloze"}}
+        config_path.parent.mkdir(parents=True, exist_ok=True)
+        config_path.write_text(DEFAULT_CONFIG_TOML)
     with open(config_path, "rb") as f:
         return tomllib.load(f)
 
