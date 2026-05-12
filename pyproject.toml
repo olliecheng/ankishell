@@ -1,0 +1,19 @@
+[project]
+name = "ankishell"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp",
+    "prefab-ui",
+    "httpx",
+]
+
+[project.scripts]
+ankishell = "ankishell.server:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
